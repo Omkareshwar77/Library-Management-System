@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library</title>
+</head>
+<body>
+    <h1>Library Management System</h1>
+
+    <form action="/add" method="post">
+        <input type="text" name="name" placeholder="Book Name" required>
+        <input type="text" name="author" placeholder="Author" required>
+        <button type="submit">Add Book</button>
+    </form>
+
+    <h2>Books</h2>
+    <ul>
+        {% for book in books %}
+        <li>
+            {{ book.name }} by {{ book.author }} -
+            {% if book.issued %}
+                Issued
+                <a href="/return/{{ loop.index0 }}">Return</a>
+            {% else %}
+                Available
+                <a href="/issue/{{ loop.index0 }}">Issue</a>
+            {% endif %}
+
+            | <a href="/delete/{{ loop.index0 }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
